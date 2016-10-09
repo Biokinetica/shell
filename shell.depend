@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1475972223 source:/home/dixieflatline/Documents/shell/p1shell.cpp
+	<unistd.h>
+	<limits.h>
+	<cstring>
+	<cstdlib>
+	<iostream>
+	<cstdio>
+	<vector>
+	<algorithm>
+	<cstddef>
+	<sys/types.h>
+	<sys/stat.h>
+	<dirent.h>
+
