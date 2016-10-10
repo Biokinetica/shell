@@ -11,6 +11,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
+#include <chrono>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
+#include <signal.h>
 bool mycomp (char c1, char c2)
 { return std::tolower(c1)<std::tolower(c2); }
 struct split
@@ -152,6 +157,35 @@ int main(void) {
 
     }
 
+
+    if(strcmp(cmd[0].c_str(),string("pwd").c_str()) == 0)
+        {
+        getcwd(outbuf,100);
+        printf("%s",outbuf);
+        }
+
+    if(strcmp(cmd[0].c_str(),string("date").c_str()) == 0)
+    {
+    time_t rawtime;
+  struct tm * timeinfo;
+
+  time (&rawtime);
+  timeinfo = localtime (&rawtime);
+  printf ("%s", asctime(timeinfo));
+     }
+
+
+  // This is where we check to see what it is they typed.
+  // If it's one of the built-ins, then fork a child to do
+  // it (unless it was cd).
+
+//          stuff the parent does, including fork.
+
+          if (fork() == 0) { // I am the child
+
+            /// do various child stuff involving implementing the
+            /// built-ins, OR using exec to execute a command I do
+            /// not have built-in.
     if(strcmp(cmd[0].c_str(),string("ls").c_str()) == 0)
     {
         if(cmd.size() == 1)
@@ -168,17 +202,32 @@ int main(void) {
         ls(outbuf,cmd[1]);
         }
     }
-  // This is where we check to see what it is they typed.
-  // If it's one of the built-ins, then fork a child to do
-  // it (unless it was cd).
 
-//          stuff the parent does, including fork.
+            if(strcmp(cmd[0].c_str(),string("hostname").c_str()) == 0)
+     {
+     char hostname[HOST_NAME_MAX];
+     gethostname(hostname, HOST_NAME_MAX);
+    printf("%s\n", hostname);
+     }
 
-          if (fork() == 0) { // I am the child
+     if(strcmp(cmd[0].c_str(),string("rmdir").c_str()) == 0)
+    {
+    rmdir(cmd[1].c_str());
 
-            /// do various child stuff involving implementing the
-            /// built-ins, OR using exec to execute a command I do
-            /// not have built-in.
+    }
+
+    if(strcmp(cmd[0].c_str(),string("kill").c_str()) == 0){
+     if(cmd.size() > 2)
+     kill(stoi(cmd[1].c_str()), stoi(cmd[2].c_str()));
+     else if(cmd.size() == 2)
+     kill(stoi(cmd[1].c_str()),9);
+    }
+
+    if(strcmp(cmd[0].c_str(),string("echo").c_str()) == 0)
+     {
+     cout << cmd[1] << '\n';
+     }
+
 
           }		// end if (I am child)
           else {			// Wait for child to terminate

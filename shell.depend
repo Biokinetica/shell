@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1475972223 source:/home/dixieflatline/Documents/shell/p1shell.cpp
+1476064526 source:/home/dixieflatline/Documents/shell/p1shell.cpp
 	<unistd.h>
 	<limits.h>
 	<cstring>
@@ -12,4 +12,8 @@
 	<sys/types.h>
 	<sys/stat.h>
 	<dirent.h>
+	<chrono>
+	<ctime>
+	<sstream>
+	<iomanip>
 
