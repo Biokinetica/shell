@@ -174,11 +174,6 @@ int main(void) {
   printf ("%s", asctime(timeinfo));
      }
 
-     if(strcmp(cmd[0].c_str(),string("echo").c_str()) == 0)
-     {
-     cout << cmd[1] << endl;
-     }
-
 
   // This is where we check to see what it is they typed.
   // If it's one of the built-ins, then fork a child to do
@@ -227,6 +222,10 @@ int main(void) {
      else if(cmd.size() == 2)
      kill(stoi(cmd[1].c_str()),9);
     }
+	if(strcmp(cmd[0].c_str(),string("echo").c_str()) == 0)
+     {
+     cout << cmd[1] << endl;
+     }
 
 
 
@@ -238,5 +237,5 @@ int main(void) {
         }
         counter = 0;				// End of kill processing
   }					// End while (!done)
-  exit(0);
+  return 0;
 }
