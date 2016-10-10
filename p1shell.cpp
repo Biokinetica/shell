@@ -70,7 +70,7 @@ if(dirName.empty())
         {
           // found a directory; recurse into it.
           std::string filePath = dirName + "/" + file;
-          std::cout << "filepath is: " << filePath << std::endl;
+          std::cout << filePath << std::endl;
 
           ls( filePath, "-R" );
         }
@@ -174,6 +174,11 @@ int main(void) {
   printf ("%s", asctime(timeinfo));
      }
 
+     if(strcmp(cmd[0].c_str(),string("echo").c_str()) == 0)
+     {
+     cout << cmd[1] << endl;
+     }
+
 
   // This is where we check to see what it is they typed.
   // If it's one of the built-ins, then fork a child to do
@@ -223,14 +228,11 @@ int main(void) {
      kill(stoi(cmd[1].c_str()),9);
     }
 
-    if(strcmp(cmd[0].c_str(),string("echo").c_str()) == 0)
-     {
-     cout << cmd[1] << '\n';
-     }
 
 
           }		// end if (I am child)
-          else {			// Wait for child to terminate
+          else {
+          // Wait for child to terminate
             // (call wait or waitpid here)
           }
         }
