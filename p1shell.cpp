@@ -1,4 +1,6 @@
-//#various include directives
+//Name Brenton Poke
+//CSC 377 Program 1
+//10/10/16
 #include <unistd.h>
 #include <limits.h>
 #include <cstring>
